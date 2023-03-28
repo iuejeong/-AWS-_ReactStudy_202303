@@ -7,6 +7,8 @@ import { Global } from "@emotion/react";
 import { reset } from "./styles/Global/reset";
 import UserList from "./pages/UserList/UserList";
 import Todo from "./pages/Todo/Todo";
+import NumberCounter from "./pages/NumberCounter/NumberCounter";
+import TodoProject from "./project/TodoProject";
 
 
 function Test1() {
@@ -29,6 +31,8 @@ function App() {
         <Route path="/sample/input/1" Component={InputSample}/>
         <Route path="/users" Component={UserList}/>
         <Route path="/todo" Component={Todo}/>
+        <Route path="/number/counter" Component={NumberCounter}/>
+        <Route path="/todo/project" Component={TodoProject}/>
       </Routes>
     </>
   );
