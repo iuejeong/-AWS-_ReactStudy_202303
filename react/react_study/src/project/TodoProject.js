@@ -12,11 +12,11 @@ const TodoProject = () => {
                 <div css={S.InputContainer}>
                     <FiFile css={S.InputFile} />
                     <input css={S.InputText} type="text" placeholder='Please enter todo...' />
-                    <BiPlus />
+                    <BiPlus css={S.InputButton}/>
                 </div>
             </header>
-            <ul>
-                <li>ds</li>
+            <ul css={S.TodoContentList}>
+                <li css={S.ContentContainer}>ds</li>
             </ul>
         </div>
     );

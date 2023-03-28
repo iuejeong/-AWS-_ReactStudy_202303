@@ -47,12 +47,27 @@ export const InputText = css`
 `;
 
 export const InputButton = css`
-    position: absolute;
-    transform: translateY(-50%);
-    top: 50%;
-    right: 0px;
-
-    border: none;
-    padding: 5px 20px;
-    height: 100%;
+    cursor: pointer;
 `;
+
+export const TodoContentList = css`
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    width: 100%;
+    height: 88%;
+    overflow-y: auto;
+`;
+
+export const ContentContainer = css`
+    margin: 10px;
+    width: 230px;
+    height: 230px;
+    box-shadow: 0px 0px 5px 1px #dbdbdb;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+    &:hover {
+        box-shadow: 0px 0px 10px 1px #121212;
+    }
+`;
+
