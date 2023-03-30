@@ -18,16 +18,28 @@ const TodoProject = () => {
         id: 0,
         content: ''
     });
-
-    const [maxId, setMaxId] = useState(0);
+    
+    const [maxId, setMaxId] = useState(1);
     const [isOpen, setIsOpen] = useState(false);
     const [todoList, setTodoList] = useState(() => {
         const storedTodoList = JSON.parse(localStorage.getItem('todoList'));
-        return storedTodoList ? storedTodoList : [];
+        return storedTodoList  ? storedTodoList : [];
     });
 
     const [modalContent, setModalContent] = useState('');
+    const todoId = useRef(1);
+
+    useEffect(() => {
+        const storedTodoList = JSON.parse(localStorage.getItem('todoList'));
+        if(storedTodoList && storedTodoList.length > 0) {
+                setTodoList(storedTodoList);
+                setMaxId(storedTodoList[storedTodoList.length - 1].id + 1);
+            }
+    }, []);
     
+    useEffect(() => {
+        localStorage.setItem('todoList', JSON.stringify(todoList));
+    }, [todoList]);
 
     const convertDay = (day) => {
         return day === 0 ? "일" 
@@ -63,28 +75,17 @@ const TodoProject = () => {
 
         const todo = {
             ...inputContents,
-            id: maxId + 1,
+            id: maxId,
             date: nowDate,
             time: nowTime
         }
 
-        setTodoList([...todoList, todo])
-        setInputContents({...inputContents, content: ''})
+        setTodoList([...todoList, todo]);
+        setInputContents({...inputContents, content: ''});
         setMaxId(maxId + 1);
-
     }
 
-    useEffect(() => {
-        const storedTodoList = JSON.parse(localStorage.getItem('todoList'));
-        if(storedTodoList) {
-            setTodoList(todoList);
-            setMaxId(storedTodoList[storedTodoList.length - 1].id)
-        }
-    }, []);
-    
-    useEffect(() => {
-        localStorage.setItem('todoList', JSON.stringify(todoList));
-    }, [todoList]);
+
 
 
     const contentChange = (e) => {
@@ -102,11 +103,8 @@ const TodoProject = () => {
     }
 
     const openModal = (id) => {
-        setModifyTodo(todoList.filter(
-            todo => todo.id === id
-            )[0]);
-
-            setIsOpen(true);
+        setModifyTodo(todoList.filter(todo => todo.id === id)[0]);
+        setIsOpen(true);
     }
 
     const onRemove = (id) => {
